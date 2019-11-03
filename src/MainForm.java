@@ -74,6 +74,7 @@ public class MainForm {
 		txtTentativi.setColumns(10);
 		
 		txtTMAX = new JTextField();
+		txtTMAX.setEditable(false);
 		txtTMAX.setColumns(10);
 		txtTMAX.setBounds(449, 38, 114, 19);
 		frame.getContentPane().add(txtTMAX);
