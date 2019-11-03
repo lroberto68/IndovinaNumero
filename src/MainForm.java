@@ -19,9 +19,12 @@ import java.awt.SystemColor;
 public class MainForm {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtTentativi;
+	private JTextField txtTMAX;
+	private JTextField txtProva;
+	private JButton btnNuova;
+	private JButton btnProva;
+	private JTextField txtLog;
 
 	/**
 	 * Launch the application.
@@ -53,26 +56,27 @@ public class MainForm {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("INDOVINA IL NUMERO");
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Nuova Partita");
-		btnNewButton.setBounds(25, 32, 147, 25);
-		frame.getContentPane().add(btnNewButton);
+		btnNuova = new JButton("Nuova Partita");
+		btnNuova.setBounds(25, 32, 147, 25);
+		frame.getContentPane().add(btnNuova);
 		
 		JLabel lblTentativi = new JLabel("Tentativi");
 		lblTentativi.setBounds(222, 42, 70, 15);
 		frame.getContentPane().add(lblTentativi);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(299, 38, 114, 19);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		txtTentativi = new JTextField();
+		txtTentativi.setEditable(false);
+		txtTentativi.setBounds(299, 38, 114, 19);
+		frame.getContentPane().add(txtTentativi);
+		txtTentativi.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(449, 38, 114, 19);
-		frame.getContentPane().add(textField_1);
+		txtTMAX = new JTextField();
+		txtTMAX.setColumns(10);
+		txtTMAX.setBounds(449, 38, 114, 19);
+		frame.getContentPane().add(txtTMAX);
 		
 		JLabel label = new JLabel("  /");
 		label.setBounds(418, 37, 31, 15);
@@ -87,12 +91,12 @@ public class MainForm {
 		lblTentativo.setBounds(25, 119, 110, 15);
 		frame.getContentPane().add(lblTentativo);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(153, 117, 114, 19);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		txtProva = new JTextField();
+		txtProva.setBounds(153, 117, 114, 19);
+		frame.getContentPane().add(txtProva);
+		txtProva.setColumns(10);
 		
-		JButton btnProva = new JButton("Prova");
+		btnProva = new JButton("Prova");
 		btnProva.setBounds(348, 114, 117, 25);
 		frame.getContentPane().add(btnProva);
 		
@@ -100,5 +104,10 @@ public class MainForm {
 		panel_1.setBorder(new LineBorder(SystemColor.inactiveCaption));
 		panel_1.setBounds(12, 104, 574, 80);
 		frame.getContentPane().add(panel_1);
+		
+		txtLog = new JTextField();
+		txtLog.setBounds(12, 196, 574, 263);
+		frame.getContentPane().add(txtLog);
+		txtLog.setColumns(10);
 	}
 }
