@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class MainForm {
@@ -25,6 +27,7 @@ public class MainForm {
 	private JButton btnNuova;
 	private JButton btnProva;
 	private JTextField txtLog;
+	private Partita p;
 
 	/**
 	 * Launch the application.
@@ -60,6 +63,12 @@ public class MainForm {
 		frame.getContentPane().setLayout(null);
 		
 		btnNuova = new JButton("Nuova Partita");
+		btnNuova.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p=new Partita();
+				txtTMAX.setText(Short.toString(p.getTMAX()));
+			}
+		});
 		btnNuova.setBounds(25, 32, 147, 25);
 		frame.getContentPane().add(btnNuova);
 		
@@ -78,6 +87,7 @@ public class MainForm {
 		txtTMAX.setColumns(10);
 		txtTMAX.setBounds(449, 38, 114, 19);
 		frame.getContentPane().add(txtTMAX);
+		
 		
 		JLabel label = new JLabel("  /");
 		label.setBounds(418, 37, 31, 15);
