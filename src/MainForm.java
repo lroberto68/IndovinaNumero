@@ -67,6 +67,7 @@ public class MainForm {
 			public void actionPerformed(ActionEvent e) {
 				p=new Partita();
 				txtTMAX.setText(Short.toString(p.getTMAX()));
+				btnNuova.setEnabled(false);
 			}
 		});
 		btnNuova.setBounds(25, 32, 147, 25);
