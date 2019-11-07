@@ -68,12 +68,7 @@ public class MainForm {
 		btnNuova = new JButton("Nuova Partita");
 		btnNuova.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				p=new Partita();
-				
-				txtTMAX.setText(Short.toString(p.getTMAX()));
-				btnNuova.setEnabled(!p.getInGame());
-				txtProva.setEnabled(p.getInGame());
-				btnProva.setEnabled(p.getInGame());
+				btnNuovaActionPerfomed(e);
 			}
 		});
 		btnNuova.setBounds(25, 32, 147, 25);
@@ -119,11 +114,7 @@ public class MainForm {
 		btnProva.setEnabled(false);
 		btnProva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				txtLog.append(p.checkNum(Short.parseShort(txtProva.getText())));
-				txtTentativi.setText(Short.toString(p.getTentativi()));
-				btnProva.setEnabled(p.getInGame());
-				btnNuova.setEnabled(!p.getInGame());
+				btnProvaActionPerfomed(e);
 			}
 		});
 		btnProva.setBounds(348, 114, 117, 25);
@@ -134,11 +125,37 @@ public class MainForm {
 		panel_1.setBounds(12, 104, 574, 80);
 		frame.getContentPane().add(panel_1);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 204, 574, 255);
+		frame.getContentPane().add(scrollPane);
+		
 		txtLog = new JTextArea();
+		scrollPane.setViewportView(txtLog);
 		txtLog.setLineWrap(true);
 		txtLog.setEditable(false);
-		txtLog.setBounds(12, 196, 574, 255);
-		frame.getContentPane().add(txtLog);
 		
+	}
+	
+	private void btnNuovaActionPerfomed(ActionEvent e){
+		
+		p=new Partita();
+		
+		txtTMAX.setText(Short.toString(p.getTMAX()));
+		txtProva.setEnabled(p.getInGame());
+		
+		configBtn(p.getInGame());
+	}
+	
+	private void btnProvaActionPerfomed(ActionEvent e){
+		
+		txtLog.append(p.checkNum(Short.parseShort(txtProva.getText())));
+		txtTentativi.setText(Short.toString(p.getTentativi()));
+		
+		configBtn(p.getInGame());
+	}
+	
+	private void configBtn(boolean inGame){
+		btnNuova.setEnabled(!p.getInGame());
+		btnProva.setEnabled(p.getInGame());
 	}
 }

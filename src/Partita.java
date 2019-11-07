@@ -1,3 +1,6 @@
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Partita {
 	
@@ -50,25 +53,28 @@ public class Partita {
 	
 	public String checkNum(short numGiocatore){
 		
+		String dat=ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
+		
 		this.numTentativo=numGiocatore;
 		this.tentativi++;
+		
 		if (this.tentativi<this.TMAX){			
 			if (this.numSegreto==this.numTentativo){
 				setInGame(false);
-				return "numero trovato...HAI VINTO\n";
+				return "numero trovato...HAI VINTO - " + dat + "\n";
 			}
 			else{
 				if (this.numSegreto<this.numTentativo){
-					return "numero troppo alto\n";
+					return "numero troppo alto - " + dat + "\n";
 				}
 				else{
-					return "numero troppo basso\n";
+					return "numero troppo basso - " + dat + "\n";
 				}
 			}
 		}
 		else {
 			setInGame(false);
-			return "raggiunto numero massimo dei tentativi..HAI PERSO...il numero segreto è: "+this.numSegreto+"\n";
+			return "raggiunto numero massimo dei tentativi..HAI PERSO...il numero segreto è: "+this.numSegreto + dat + "\n";
 		}
 		
 		
