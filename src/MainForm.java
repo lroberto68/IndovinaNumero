@@ -11,11 +11,14 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 
 public class MainForm {
@@ -26,7 +29,7 @@ public class MainForm {
 	private JTextField txtProva;
 	private JButton btnNuova;
 	private JButton btnProva;
-	private JTextField txtLog;
+	private JTextArea txtLog;
 	private Partita p;
 
 	/**
@@ -66,8 +69,11 @@ public class MainForm {
 		btnNuova.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p=new Partita();
+				
 				txtTMAX.setText(Short.toString(p.getTMAX()));
-				btnNuova.setEnabled(false);
+				btnNuova.setEnabled(!p.getInGame());
+				txtProva.setEnabled(p.getInGame());
+				btnProva.setEnabled(p.getInGame());
 			}
 		});
 		btnNuova.setBounds(25, 32, 147, 25);
@@ -104,11 +110,22 @@ public class MainForm {
 		frame.getContentPane().add(lblTentativo);
 		
 		txtProva = new JTextField();
+		txtProva.setEnabled(false);
 		txtProva.setBounds(153, 117, 114, 19);
 		frame.getContentPane().add(txtProva);
 		txtProva.setColumns(10);
 		
 		btnProva = new JButton("Prova");
+		btnProva.setEnabled(false);
+		btnProva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				txtLog.append(p.checkNum(Short.parseShort(txtProva.getText())));
+				txtTentativi.setText(Short.toString(p.getTentativi()));
+				btnProva.setEnabled(p.getInGame());
+				btnNuova.setEnabled(!p.getInGame());
+			}
+		});
 		btnProva.setBounds(348, 114, 117, 25);
 		frame.getContentPane().add(btnProva);
 		
@@ -117,9 +134,11 @@ public class MainForm {
 		panel_1.setBounds(12, 104, 574, 80);
 		frame.getContentPane().add(panel_1);
 		
-		txtLog = new JTextField();
-		txtLog.setBounds(12, 196, 574, 263);
+		txtLog = new JTextArea();
+		txtLog.setLineWrap(true);
+		txtLog.setEditable(false);
+		txtLog.setBounds(12, 196, 574, 255);
 		frame.getContentPane().add(txtLog);
-		txtLog.setColumns(10);
+		
 	}
 }
