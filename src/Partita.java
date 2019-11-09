@@ -55,14 +55,15 @@ public class Partita {
 		
 		String dat=ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
 		this.numTentativo=numGiocatore;
+		this.tentativi++;
 		
 		if (this.numSegreto==this.numTentativo){
-			this.tentativi++;
+			
 			setInGame(false);
 			return "numero trovato...HAI VINTO - " + dat + "\n";
 		}
 		else{
-			this.tentativi++;
+			
 			if (this.tentativi==this.TMAX){
 				setInGame(false);
 				return "raggiunto numero massimo dei tentativi..HAI PERSO...il numero segreto è: " + this.numSegreto + " " + dat + "\n";
