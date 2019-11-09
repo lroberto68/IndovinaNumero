@@ -154,14 +154,24 @@ public class MainForm {
 	}
 	
 	private void btnProvaActionPerfomed(ActionEvent e){
-		try{		
-			txtLog.append(p.checkNum(Short.parseShort(txtProva.getText())));
+		try{
+			short tentativo=Short.parseShort(txtProva.getText());
+			
+			if (tentativo<1 || tentativo>p.getNMAX()){
+				throw new NumberLimitException("Inserire un numero tra 1 e " + p.getNMAX());
+			}
+			
+			txtLog.append(p.checkNum(tentativo));
 			txtTentativi.setText(Short.toString(p.getTentativi()));
 			configBtn(p.getInGame());
 		}
+		//TODO VERIFICARE CHE IL NUMERO INSERITO E' TRA 1 E 100
 		catch(NumberFormatException err){
 			//err.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Inserire un valore numerico", "errore", JOptionPane.ERROR_MESSAGE);
+		}
+		catch (NumberLimitException err){
+			JOptionPane.showMessageDialog(null, err.getMessage(), "errore", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
