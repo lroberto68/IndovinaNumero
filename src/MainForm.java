@@ -2,21 +2,28 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+
 import javax.swing.JButton;
+
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 
@@ -141,17 +148,22 @@ public class MainForm {
 		p=new Partita();
 		
 		txtTMAX.setText(Short.toString(p.getTMAX()));
-		txtProva.setEnabled(p.getInGame());
+		txtProva.setEnabled(p.getInGame());			
 		
-		configBtn(p.getInGame());
+		configBtn(p.getInGame());			
 	}
 	
 	private void btnProvaActionPerfomed(ActionEvent e){
+		try{		
+			txtLog.append(p.checkNum(Short.parseShort(txtProva.getText())));
+			txtTentativi.setText(Short.toString(p.getTentativi()));
+			configBtn(p.getInGame());
+		}
+		catch(NumberFormatException err){
+			//err.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Inserire un valore numerico", "errore", JOptionPane.ERROR_MESSAGE);
+		}
 		
-		txtLog.append(p.checkNum(Short.parseShort(txtProva.getText())));
-		txtTentativi.setText(Short.toString(p.getTentativi()));
-		
-		configBtn(p.getInGame());
 	}
 	
 	private void configBtn(boolean inGame){

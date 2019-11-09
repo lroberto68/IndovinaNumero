@@ -51,17 +51,21 @@ public class Partita {
 		return (short) ((Math.random()*NMAX)+1);
 	}
 	
-	public String checkNum(short numGiocatore){
+	public String checkNum (short numGiocatore){
 		
 		String dat=ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
-		
 		this.numTentativo=numGiocatore;
-		this.tentativi++;
 		
-		if (this.tentativi<this.TMAX){			
-			if (this.numSegreto==this.numTentativo){
+		if (this.numSegreto==this.numTentativo){
+			this.tentativi++;
+			setInGame(false);
+			return "numero trovato...HAI VINTO - " + dat + "\n";
+		}
+		else{
+			this.tentativi++;
+			if (this.tentativi==this.TMAX){
 				setInGame(false);
-				return "numero trovato...HAI VINTO - " + dat + "\n";
+				return "raggiunto numero massimo dei tentativi..HAI PERSO...il numero segreto è: " + this.numSegreto + " " + dat + "\n";
 			}
 			else{
 				if (this.numSegreto<this.numTentativo){
@@ -72,12 +76,5 @@ public class Partita {
 				}
 			}
 		}
-		else {
-			setInGame(false);
-			return "raggiunto numero massimo dei tentativi..HAI PERSO...il numero segreto è: "+this.numSegreto + dat + "\n";
-		}
-		
-		
 	}
-
 }
